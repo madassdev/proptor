@@ -27,6 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'context' => 'main',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +162,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        App\Providers\MultiTenantProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
         /*
          * Package Service Providers...

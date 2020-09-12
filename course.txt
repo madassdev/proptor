@@ -1,0 +1,67 @@
+Course Model
+id
+uploaded_by
+title
+description
+short_desc
+image_url
+gallery_images_url
+price
+tutor_id
+
+has many chapters
+
+upload course
+    {
+        -p /courses {course_details, video_urls}
+        
+    }
+
+
+    id
+    has_creator
+    creator_id
+    name
+    desc
+    price
+    structure{
+
+    }
+
+    videos{
+        id
+        course_id
+        chapter:4
+        chapter_desc:
+        title: Laravel auth
+        desc: We will teavh you autnentication
+        *url:
+        status
+
+    }
+
+
+
+/uploadcoursevideo
+    course video object
+        course_id:1,
+        total_chapters:4,
+        videos:
+            [
+                {
+                    "chapter":1,
+                    "chapter_title":"Introduction"
+                    "title": "1. What is Rest API",
+                    "desc":"REST is what it is",
+                    "url":"cloudinary.com/video/blablabla",
+                    "status":"uploaded"
+                },
+
+            ]
+
+chapters model
+{
+    course_id,
+    title,
+    
+}
