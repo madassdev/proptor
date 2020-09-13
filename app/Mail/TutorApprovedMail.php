@@ -8,16 +8,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisteredMail extends Mailable implements ShouldQueue
+class TutorApprovedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -30,6 +25,6 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('email.auth.user-registered');
+        return $this->view('email.auth.tutor-approved');
     }
 }
