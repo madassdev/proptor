@@ -27,9 +27,9 @@ class CreateOauthClientsTable extends Migration
         });
 
         DB::insert('insert into oauth_clients (id, name, secret, redirect, personal_access_client, password_client, revoked) values (?, ?, ?, ?, ?, ?, ?)',
-            [1, 'Learnstack Personal Access Client', 'secret', 'https://learnstack.com', 1, 0, 0]);
+            [1, 'Learnstack Personal Access Client', 'secret', 'https://proptor.com', 1, 0, 0]);
         DB::insert('insert into oauth_clients (id, name, secret, redirect, personal_access_client, password_client, revoked) values (?, ?, ?, ?, ?, ?, ?)',
-            [2, 'Learnstack Password Grant Client', 'grant', 'http://learnstack.com', 0, 1, 0]);
+            [2, 'Learnstack Password Grant Client', 'grant', 'http://proptor.com', 0, 1, 0]);
     }
 
     /**

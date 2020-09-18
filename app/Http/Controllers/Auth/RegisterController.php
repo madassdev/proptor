@@ -21,6 +21,7 @@ class RegisterController extends Controller
         // Create User, send User a mail and assign the User role
         $user = User::create($data);
         $user->assignRole('user');
+        
         Mail::to($user)->send(new UserRegisteredMail($user));
 
         if($request->is_tutor)

@@ -1,88 +1,42 @@
-USER logs in
-    {
-        auth
-    }
+Type BelongsToMany Feature
+Feature BelongsToMany Type
+Type BelongsToMany Property
+Feature BelongsToMany Property
 
-User sees courses
-    {
-        -G /courses
-        -G /courses/{courses}
-    }
-
-User selects course and prepares to pay
-    {
-        -P /orders : [course_id]
-    }
-User pays
-    {
-        -P /payments :{purpose-order_id}
-    }
-
-User gets course
-  (access) -G /courses/{course}/
-
-
-// ADMIN AND CREATOR
-
-upload course
-    {
-        -p /courses {course_details, video_urls}
-        
-    }
-
-
-    id
-    has_creator
-    creator_id
-    name
-    desc
-    price
-    structure{
-
-    }
-
-    videos{
-        id
-        course_id
-        chapter:4
-        chapter_desc:
-        title: Laravel auth
-        desc: We will teavh you autnentication
-        *url:
-        status
-
-    }
+Property hasMany Sale
+Type hasMany Property 
+Sale HasMany Payment
+Sale hasMany Review 
+Plan hasMany Sale
+User hasMany Payments
 
 
 
-/uploadcoursevideo
-    course video object
-        course_id:1,
-        total_chapters:4,
-        videos:
-            [
-                {
-                    "chapter":1,
-                    "chapter_title":"Introduction"
-                    "title": "1. What is Rest API",
-                    "desc":"REST is what it is",
-                    "url":"cloudinary.com/video/blablabla",
-                    "status":"uploaded"
-                },
+Property belongsTo Type
+Property belongsToMany Type
+Sale belongsTo Property
+Sale belongsTo User
+Sale belongsTo Agent
+Sale belongsTo Plan
 
-            ]
+Review belongsTo Sale (only after complete/first payment of sale)
 
-chapters model
-{
-    course_id,
-    title,
-    
-}
 
-USER
-TUTORS
-COURSES
-CATEGORIES
-CHAPTERS
-VIDEOS
+
+Sale belongsToPlan
+
+Country hasMany State
+State
+
+User
+Agent
+Type
+Feature
+Plan
+Property
+Sale
+Payment
+Review
+Country
+State
 

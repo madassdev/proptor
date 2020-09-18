@@ -41,9 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tutor()
+    public function agent()
     {
-        return $this->hasOne(Tutor::class);
+        return $this->hasOne(Agent::class);
     }
     
     public static function resolveFirstAndLastName(String $full_name)

@@ -98,43 +98,55 @@ class CreatePermissionTables extends Migration
                 ['name' => 'edit-user'],
                 ['name' => 'delete-user'],
 
-                // Course
-                ['name' => 'add-course'],
-                ['name' => 'list-course'],
-                ['name' => 'show-course'],
-                ['name' => 'edit-course'],
-                ['name' => 'delete-course'],
+                // Property
+                ['name' => 'add-property'],
+                ['name' => 'list-property'],
+                ['name' => 'show-property'],
+                ['name' => 'edit-property'],
+                ['name' => 'delete-property'],
 
-                // Chapter
-                ['name' => 'add-chapter'],
-                ['name' => 'list-chapter'],
-                ['name' => 'show-chapter'],
-                ['name' => 'edit-chapter'],
-                ['name' => 'delete-chapter'],
+                // Type
+                ['name' => 'add-feature'],
+                ['name' => 'list-feature'],
+                ['name' => 'show-feature'],
+                ['name' => 'edit-feature'],
+                ['name' => 'delete-feature'],
 
-                // Video
-                ['name' => 'add-video'],
-                ['name' => 'list-video'],
-                ['name' => 'show-video'],
-                ['name' => 'edit-video'],
-                ['name' => 'delete-video'],
+                ['name' => 'add-type'],                
+                ['name' => 'list-type'],                
+                ['name' => 'show-type'],                
+                ['name' => 'edit-type'],                
+                ['name' => 'delete-type'],                
 
-                // order
-                ['name' => 'add-order'],
-                ['name' => 'list-order'],
-                ['name' => 'show-order'],
-                ['name' => 'edit-order'],
-                ['name' => 'delete-order'],
+                // Sale
+                ['name' => 'add-sale'],
+                ['name' => 'list-sale'],
+                ['name' => 'show-sale'],
+                ['name' => 'edit-sale'],
+                ['name' => 'delete-sale'],
+
+                // Payment
+                ['name' => 'add-payment'],
+                ['name' => 'list-payment'],
+                ['name' => 'show-payment'],
+                ['name' => 'edit-payment'],
+                ['name' => 'delete-payment'],
+
+                // Plan
+                ['name' => 'add-plan'],
+                ['name' => 'list-plan'],
+                ['name' => 'show-plan'],
+                ['name' => 'edit-plan'],
+                ['name' => 'delete-plan'],
     
             ];
 
-            $tutor_permissions = [
-                'add-course', 'list-course', 'show-course', 'edit-course', 'delete-course',
-                'add-course', 'list-course', 'show-course', 'edit-course', 'delete-course',
-                'add-video', 'list-video', 'show-video', 'edit-video', 'delete-video',
+            $agent_permissions = [
+                'add-sale', 'list-sale', 'show-sale', 'edit-sale', 'delete-sale',
+                'list-payment', 'show-payment',
             ];
 
-            $user_permissions = ['show-course'];
+            $user_permissions = ['show-property', 'list-property', 'add-sale', 'add-payment', 'show-sale'];
 
     
             $admin = User::find(1);
@@ -144,8 +156,9 @@ class CreatePermissionTables extends Migration
             }
             $roles =[
                 ['name' => 'admin', 'permissions'=>$permissions],
-                ['name' => 'tutor', 'permissions' => $tutor_permissions],
+                ['name' => 'agent', 'permissions' => $agent_permissions],
                 ['name' => 'user', 'permissions' => $user_permissions],
+                ['name' => 'accountant', 'permissions' => $user_permissions],
             ];
 
     
@@ -154,7 +167,7 @@ class CreatePermissionTables extends Migration
                 $created_role->givePermissionTo($role['permissions']);
             }
 
-            $admin->assignRole('admin', 'tutor', 'user');
+            $admin->assignRole('admin', 'agent', 'user', 'accountant');
     }
 
     /**

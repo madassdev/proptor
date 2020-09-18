@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
 use App\Mail\TutorApprovedMail;
-use App\Models\Tutor;
+use App\Models\Agent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -58,15 +58,25 @@ class UserController extends Controller
 
     }
 
-    public function approveTutor(Tutor $tutor)
+    public function approveAgent(Agent $agent)
     {
-        $tutor->status = "approved";
-        $tutor->save();
-        $tutor->user->assignRole('tutor');
+        $agent->status = "approved";
+        $agent->save();
+        $agent->user->assignRole('agebt');
         
-        Mail::to($tutor->user)->queue(new TutorApprovedMail($tutor->user));
+        Mail::to($agent->user)->queue(new TutorApprovedMail($agent->user));
 
-        return response()->json(['message'=>'Tutor approved successfully', 'data' => $tutor]);
+        return response()->json(['message'=>'Agent approved successfully', 'data' => $agent]);
+    }
+
+    public function disproveAgent(Agent $agent)
+    {
+        $agent->status = "disproved";
+        $agent->save();
+        
+        // Mail::to($tutor->user)->queue(new TutorApprovedMail($tutor->user));
+
+        return response()->json(['message'=>'Agent disproved successfully', 'data' => $agent]);
     }
 
     public function getPermittedUsers()

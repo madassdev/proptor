@@ -28,6 +28,7 @@ Route::group(['namespace'=>'Auth', 'prefix'=>'auth'], function(){
 });
 
 Route::group(['middleware'=>'auth:api'], function(){
+    
     // USER
     Route::group(['prefix'=>'users'], function(){
         Route::get('', 'UserController@index');
@@ -39,13 +40,14 @@ Route::group(['middleware'=>'auth:api'], function(){
     });
 
     // TUTOR
-    Route::group(['prefix'=>'tutors'], function(){
-        Route::post('{tutor}/approve', 'UserController@approveTutor');
+    Route::group(['prefix'=>'agents'], function(){
+        Route::post('{agent}/approve', 'UserController@approveAgent');
     });
 
     
-    Route::resource('categories', 'CategoryController');
-    Route::resource('courses', 'CourseController');
 });
+Route::resource('types', 'TypeController');
+Route::resource('features', 'FeatureController');
+Route::resource('plans', 'PlanController');
 
 

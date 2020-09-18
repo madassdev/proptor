@@ -21,7 +21,7 @@ class PasswordResetController extends Controller
         ]);
 
         $user = User::whereEmail($request->email)->first();
-        // return $user;
+
         $password_reset = PasswordReset::updateOrCreate(
             ['email' => $user->email],
                 [
@@ -29,6 +29,7 @@ class PasswordResetController extends Controller
                     'token' => Str::random(60)
                 ]
         );
+        
         $password_reset_url = url("/reset-password?email=".$user->email."&token=".$password_reset->token);
 
         Mail::to($user)->queue(new PasswordResetTokenMail($user, $password_reset_url));
@@ -67,7 +68,7 @@ class PasswordResetController extends Controller
         $password_reset->delete();
 
         Mail::to($user)->queue(new PasswordResetSuccessfulMail($user, $generated_password));
-        
+
         return response()->json([
             'message'=>true,
             'data'=>['message' => 'Your password has been reset. We have e-mailed your password new password!']
