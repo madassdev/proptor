@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'ProptorX'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://prop.dev'),
 
     'asset_url' => env('ASSET_URL', null),
 
