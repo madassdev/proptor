@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Property;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PropertyUpdateRequest extends FormRequest
@@ -13,7 +14,8 @@ class PropertyUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $user = auth()->user();
+        return $user->can('edit-property');
     }
 
     /**
@@ -23,8 +25,6 @@ class PropertyUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Property::VALIDATION;
     }
 }

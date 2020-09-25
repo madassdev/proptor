@@ -12,7 +12,15 @@ class Sale extends Model
 
     public const VALIDATION = [];
     
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'agent_id',
+        'property_id',
+        'plan_id',
+        'first_amount',
+        'total_amount',
+        'code',
+    ];
 
     public function agent()
     {
@@ -32,5 +40,10 @@ class Sale extends Model
     public function property()
     {
         return $this->belongsTo(Property::class);
+    }
+
+    public function min_first_pay()
+    {
+        return $this->property;
     }
 }

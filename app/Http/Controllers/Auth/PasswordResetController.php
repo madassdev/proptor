@@ -71,7 +71,7 @@ class PasswordResetController extends Controller
 
         return response()->json([
             'message'=>true,
-            'data'=>['message' => 'Your password has been reset. We have e-mailed your password new password!']
+            'data'=>['message' => 'Your password has been reset. We have e-mailed your new password!']
         ]);
     }
 
@@ -79,12 +79,6 @@ class PasswordResetController extends Controller
 
 class PasswoardResetController extends Controller
 {
-    /**
-     * Create token password reset
-     *
-     * @param  [string] email
-     * @return [string] message
-     */
     public function find($token)
     {
         $passwordReset = PasswordReset::where('token', $token)
@@ -103,16 +97,7 @@ class PasswoardResetController extends Controller
         }
         return response()->json($passwordReset);
     }
-     /**
-     * Reset password
-     *
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [string] password_confirmation
-     * @param  [string] token
-     * @return [string] message
-     * @return [json] user object
-     */
+     
     public function reset(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
@@ -130,6 +115,7 @@ class PasswoardResetController extends Controller
             ['token', $request->token],
             ['email', $request->email]
         ])->first();
+
         if (!$passwordReset)
             return response()->json([
                 'success' => false,

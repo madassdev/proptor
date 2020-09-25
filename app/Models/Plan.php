@@ -36,4 +36,5 @@ class Plan extends Model
     {
         return $this->belongsToMany(Property::class);
     }
+
 }

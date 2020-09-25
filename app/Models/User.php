@@ -45,6 +45,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Agent::class);
     }
+
+    public function agents()
+    {
+        return $this->belongsToMany(Agent::class);
+    }
     
     public static function resolveFirstAndLastName(String $full_name)
     {

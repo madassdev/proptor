@@ -19,10 +19,11 @@ class CreateSalesTable extends Migration
             $table->foreignId('plan_id')->constrained();
             $table->foreignId('agent_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->integer('amount');
+            $table->integer('first_amount');
+            $table->integer('total_amount');
             $table->string('code');
             $table->string('payment_method')->nullable();
-            $table->string('payment_status');
+            $table->string('payment_status')->default('pending');
             $table->integer('total_paid')->default(0);
             $table->timestamps();
             $table->softDeletes();

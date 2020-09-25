@@ -49,5 +49,8 @@ Route::group(['middleware'=>'auth:api'], function(){
 Route::resource('types', 'TypeController');
 Route::resource('features', 'FeatureController');
 Route::resource('plans', 'PlanController');
+Route::resource('properties', 'PropertyController');
+Route::post('sales', 'SaleController@addSale');
+Route::post('sales/{sale}/pay', 'SaleController@payForSale');
 
 

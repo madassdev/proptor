@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePropertiesTable extends Migration
+class CreateLandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,34 +13,21 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('lands', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default('active');
-            $table->string('type')->default('active');
             $table->string('name');
             $table->string('slug');
             $table->integer('price');
             $table->integer('general_price')->nullable();
-            $table->integer('units')->default(1);
+            $table->integer('plots')->default(1);
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();
 
-            $table->text('image_url')->nullable();
-            $table->text('gallery_images_url')->nullable();
-
             $table->string('state')->nullable();
             $table->text('address')->nullable();
-            $table->text('lga')->nullable();
-
-            $table->string('length')->nullable();
-            $table->string('width')->nullable();
-            $table->string('size')->nullable();
-            $table->string('lat')->nullable();
-            $table->string('long')->nullable();
-
-            $table->string('bedrooms')->nullable();
-            $table->string('bathrooms')->nullable();
-
+            $table->text('image_url')->nullable();
+            $table->text('gallery_images_url')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -53,6 +40,6 @@ class CreatePropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('lands');
     }
 }
