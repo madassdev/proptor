@@ -27,13 +27,16 @@ class LoginController extends Controller
             return response()->json(["message"=>"Unauthenticated"],401);
         }
         
-        $token =  $user->createToken('ngcart-token')->accessToken;
+        $token =  $user->createToken('proptor-token')->accessToken;
         $roles = $user->roles->pluck('name')->toArray();
+        $permissions = $user->permissions->pluck('name')->toArray();
 
         return response()->json(['message'=>'Login successful.',
                                     'data' => ['token'=>$token, 
                                     'user'=>$user, 
-                                    'user_roles'=>$roles]]);
+                                    'user_roles'=>$roles,
+                                    'user_permissions'=>$permissions,
+                                    ]]);
     }
 
     public function logout()

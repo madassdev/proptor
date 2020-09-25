@@ -24,17 +24,17 @@ class RegisterController extends Controller
         
         Mail::to($user)->send(new UserRegisteredMail($user));
 
-        if($request->is_tutor)
-        {
-            $user->tutor()->create([
-                'name' => $user->full_name,
-                'description' => 'Tutor',
-            ]);
+        // if($request->is_tutor)
+        // {
+        //     $user->tutor()->create([
+        //         'name' => $user->full_name,
+        //         'description' => 'Tutor',
+        //     ]);
 
-            Mail::to(User::permission('add-user')->get()->toArray())->queue(new TutorRegisteredMail($user));
-        }
+        //     Mail::to(User::permission('add-user')->get()->toArray())->queue(new TutorRegisteredMail($user));
+        // }
         // Login the user
-        $token =  $user->createToken('learnstack-token')->accessToken;
+        $token =  $user->createToken('proptor-token')->accessToken;
         $roles = $user->roles->pluck('name')->toArray();
         return response()->json(['message'=>'User created successfully',
                                 'data' => ['token'=>$token, 'user'=>$user]]
