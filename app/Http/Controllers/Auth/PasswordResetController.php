@@ -73,7 +73,7 @@ class PasswordResetController extends Controller
             'message'=>true,
             'data'=>['message' => 'Your password has been reset. We have e-mailed your new password!', 'data'=>[
                 "user"=>$user,
-                "token"=>$tokenS
+                "token"=>$token
             ]]
         ]);
     }
