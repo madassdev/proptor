@@ -27,11 +27,10 @@ class UserCreateRequest extends FormRequest
 
             $rules = [
                 "full_name" => 'required',
-                "email" => 'required|email',
-                // "email" => 'required|email|unique:users',
+                // "email" => 'required|email',
+                "email" => 'required|email|unique:users',
                 "mobile" => 'string',
                 "password" => "required|min:6",
-                "is_tutor" => 'required|sometimes|in:0,1'
             ];
         }
 

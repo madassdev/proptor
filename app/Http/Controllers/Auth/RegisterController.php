@@ -33,13 +33,14 @@ class RegisterController extends Controller
 
         //     Mail::to(User::permission('add-user')->get()->toArray())->queue(new TutorRegisteredMail($user));
         // }
+        
         // Login the user
         $token =  $user->createToken('proptor-token')->accessToken;
         $roles = $user->roles->pluck('name')->toArray();
+        $permissions = $user->permissions->pluck('name')->toArray();
         return response()->json(['message'=>'User created successfully',
                                 'data' => ['token'=>$token, 'user'=>$user]]
                             );
-
     }
 
     
