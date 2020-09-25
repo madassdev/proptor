@@ -71,7 +71,10 @@ class PasswordResetController extends Controller
 
         return response()->json([
             'message'=>true,
-            'data'=>['message' => 'Your password has been reset. We have e-mailed your new password!']
+            'data'=>['message' => 'Your password has been reset. We have e-mailed your new password!', 'data'=>[
+                "user"=>$user,
+                "token"=>$token
+            ]]
         ]);
     }
 
