@@ -23,7 +23,7 @@ class UserCreateRequest extends FormRequest
      */
     public function rules()
     {
-        if(resolve('context') == 'class'){
+        // if(resolve('context') == 'prop'){
 
             $rules = [
                 "full_name" => 'required',
@@ -32,14 +32,14 @@ class UserCreateRequest extends FormRequest
                 "mobile" => 'string',
                 "password" => "required|min:6",
             ];
-        }
+        // }
 
-        if(resolve('context') == 'main'){
+        // if(resolve('context') == 'main'){
 
-            $rules = [
-                "email" => 'required'
-            ];
-        }
+        //     $rules = [
+        //         "email" => 'required'
+        //     ];
+        // }
         
         // $rules = [];
         return $rules;
