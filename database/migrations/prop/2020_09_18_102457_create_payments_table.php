@@ -22,6 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->string('reference');
             $table->string('status')->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
