@@ -68,7 +68,7 @@
                             <td>{{number_format($property->size ?? 100)}}</td>
                             <td>
                                 <small>
-                                {{ucfirst($property->city .', '.$property->city)}} </td>
+                                {{ucfirst($property->address .' | '.$property->state)}} </td>
                                 </small>
                             <td>
                                 <span class="badge badge-{{$status[$property->status]}}">

@@ -32,6 +32,7 @@ class Property extends Model
         'gallery_images_url' => ['string', 'nullable'],
 
         'state' => ['string', 'nullable'],
+        'city' => ['string', 'nullable'],
         'address' => ['string', 'nullable'],
         'lga' => ['string', 'nullable'],
 
@@ -63,6 +64,7 @@ class Property extends Model
         'short_description',
         'state',
         'size',
+        'city',
         'address',
         'image_url',
         'gallery_images_url',
