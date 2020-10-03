@@ -78,6 +78,12 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row mt-3">
+                            <label class="col-md-3 col-form-label" for="textarea-input">Address</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="textarea-input" name="address" rows="2" placeholder="Enter the address of the property">{{old('address')}}</textarea>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="Select">Select plans</label>
                             <select name="plans[]" class="form-control plans-select @error('size') is-invalid @enderror" id="plans-select" multiple="true" required>
@@ -92,6 +98,7 @@
                                 </span>
                             @enderror
                         </div>
+                        <hr>
 
                         <div class="form-group row mt-3">
                             <label class="col-md-3 col-form-label" for="textarea-input">Description</label>

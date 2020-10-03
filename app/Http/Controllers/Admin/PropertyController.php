@@ -40,8 +40,19 @@ class PropertyController extends Controller
     }
     public function store(PropertyCreateRequest $request)
     {
-        $image_url = null;
-        $gallery_images_url = null;
+        $image_url = [
+            "public_id"=> "placeholder-image-368x247_sqyisc",
+            "url"=> "https://res.cloudinary.com/franksmith/image/upload/v1601745772/placeholder-image-368x247_sqyisc.png"
+        ];
+        $gallery_images_url = [
+            [
+                "public_id"=> "placeholder-image-368x247_sqyisc",
+                "url"=> "https://res.cloudinary.com/franksmith/image/upload/v1601745772/placeholder-image-368x247_sqyisc.png"
+            ],[
+                "public_id"=> "placeholder-image-368x247_sqyisc",
+                "url"=> "https://res.cloudinary.com/franksmith/image/upload/v1601745772/placeholder-image-368x247_sqyisc.png"
+            ]
+        ];
 
         if($request->has('image'))
         {

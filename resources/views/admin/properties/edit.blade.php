@@ -83,7 +83,7 @@ switch (request()->step) {
                         <div class="row">
                             <div class="form-group col-sm-8">
                                 <label for="city">State</label>
-                                <input class="form-control @error('state') is-invalid @enderror" id="state" value="{{ old('state') }}" name="state" type="text" placeholder="Enter state">
+                                <input class="form-control @error('state') is-invalid @enderror" id="state" value="{{ $property->state }}" name="state" type="text" placeholder="Enter state">
                                 @error('state')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -91,15 +91,21 @@ switch (request()->step) {
                                 @enderror
                             </div>
                             <div class="form-group col-sm-4">
-                            <label for="postal-code">City </label>
-                                <input class="form-control @error('city') is-invalid @enderror" id="city" value="{{ old('city') }}" name="city" type="text" placeholder="Enter city">
-                                @error('city')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <label for="postal-code">City </label>
+                                    <input class="form-control @error('city') is-invalid @enderror" id="city" value="{{ $property->city }}" name="city" type="text" placeholder="Enter city">
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group row mt-3">
+                                <label class="col-md-3 col-form-label" for="textarea-input">Address</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="textarea-input" name="address" rows="2" placeholder="Enter the address of the property">{{$property->address}}</textarea>
+                                </div>
+                            </div>
                         <div class="form-group">
                             <label for="Select">Select plans</label>
                             <select name="plans[]" class="form-control plans-select" id="plans-select" multiple="true">
@@ -112,6 +118,23 @@ switch (request()->step) {
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                        <hr>
+                        <div class="form-group row mt-3">
+                            <label class="col-md-3 col-form-label" for="textarea-input">Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="textarea-input" name="description" rows="5" placeholder="Description of property">{{$property->description}}</textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group py-3 text-center border-secondary m-3">
+                            <label for="image url">Preview image</label> <br>
+                            <img src="{{$property->image_url['url']}}" class="img-responsive col-md-3" alt="">
+                            <a href="{{route('admin.properties.edit-image')}}" class="text-primary">Edit</a>
+                        </div>
+                        <div class="form-group py-3 text-center border-secondary m-3">
+                            <label for="image url">Gallery images</label> <br>
+                            <input type="file" id="" name="gallery_images[]" multiple="true" placeholder="Select images">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-info">Update</button>

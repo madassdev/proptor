@@ -72,7 +72,7 @@ class SaleController extends Controller
         $request->validate([
             "amount"=>"required|numeric|min:0",
             "payment_method" => "required|string|in:bank-transfer,paystack,flutterwave",
-            "payment_reference" => "required|string",
+            "payment_reference" => "required_unless:payment_method,bank-transfer|string",
         ]);
         
          /*
