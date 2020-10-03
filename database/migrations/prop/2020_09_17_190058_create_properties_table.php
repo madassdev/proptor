@@ -29,8 +29,9 @@ class CreatePropertiesTable extends Migration
             $table->text('gallery_images_url')->nullable();
 
             $table->string('state')->nullable();
+            $table->string('city')->nullable();
             $table->text('address')->nullable();
-            $table->text('lga')->nullable();
+            $table->text('neighborhood')->nullable();
 
             $table->string('length')->nullable();
             $table->string('width')->nullable();
@@ -40,6 +41,8 @@ class CreatePropertiesTable extends Migration
 
             $table->string('bedrooms')->nullable();
             $table->string('bathrooms')->nullable();
+            $table->string('unit')->nullable();
+            $table->string('measurement')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

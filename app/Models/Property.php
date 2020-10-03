@@ -24,31 +24,31 @@ class Property extends Model
         'slug' => ['string'],
         'price' => ['required', 'sometimes', 'numeric', 'min:1'],
         'general_price' => ['numeric', 'min:1','gte:price|min:0'],
-        'units' => ['numeric', 'min:1'],
-        'description' => ['string'],
-        'short_description' => ['string'],
+        'units' => ['numeric', 'min:1', 'nullable'],
+        'description' => ['string', 'nullable'],
+        'short_description' => ['string', 'nullable'],
 
-        'image_url' => ['string'],
-        'gallery_images_url' => ['string'],
+        'image_url' => ['string', 'nullable'],
+        'gallery_images_url' => ['string', 'nullable'],
 
-        'state' => ['string'],
-        'address' => ['string'],
-        'lga' => ['string'],
+        'state' => ['string', 'nullable'],
+        'address' => ['string', 'nullable'],
+        'lga' => ['string', 'nullable'],
 
-        'length' => ['string'],
-        'width' => ['string'],
-        'size' => ['string'],
-        'lat' => ['string'],
-        'long' => ['string'],
+        'length' => ['string', 'nullable'],
+        'width' => ['string', 'nullable'],
+        'size' => ['numeric', 'nullable'],
+        'lat' => ['string', 'nullable'],
+        'long' => ['string', 'nullable'],
 
-        'bedrooms' => ['string'],
-        'bathrooms' => ['string'],
+        'bedrooms' => ['string', 'nullable'],
+        'bathrooms' => ['string', 'nullable'],
 
 
-        'features' => ['array'],
-        'features.*' => ['string'],
-        'plans' => ['required','array'],
-        'plans.*' => ['numeric', 'exists:plans,id']
+        'features' => ['array', 'nullable'],
+        'features.*' => ['string', 'nullable'],
+        'plans' => ['required','array', 'nullable'],
+        'plans.*' => ['numeric', 'exists:plans,id', 'nullable']
     ];
     
     protected $fillable = [
@@ -62,9 +62,15 @@ class Property extends Model
         'description',
         'short_description',
         'state',
+        'size',
         'address',
         'image_url',
         'gallery_images_url',
+    ];
+
+    protected $casts = [
+        'image_url' => 'array',
+        'gallery_images_url' => 'array',
     ];
 
     public function plans()

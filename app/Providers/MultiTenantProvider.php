@@ -13,12 +13,14 @@ class MultiTenantProvider extends ServiceProvider
      */
     public function register()
     {
+        // dd($this->app->request->url());
+
         app()->bind('context', function(){
             $domain = explode(':',$this->app->request->getHttpHost())[0];
             $split_domain = explode('.', $domain);
             $subdomain = (sizeof($split_domain) <= 2 && !in_array("localhost", $split_domain)) ? "www" : $split_domain[0];
             $host = ($domain == 'localhost' or $domain == '127.0.0.1') ? 'localhost' : $split_domain[count($split_domain)-2];
-            return $host == 'learnstack' ? 'main' : 'class';
+            return $host == 'proptor' ? 'main' : 'prop';
         });
 
         

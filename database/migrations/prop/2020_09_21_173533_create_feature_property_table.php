@@ -15,8 +15,8 @@ class CreateFeaturePropertyTable extends Migration
     {
         Schema::create('feature_property', function (Blueprint $table) {
             $table->bigIncrements('id'); 
-            $table->foreignId('feature_id')->constrained()->default(null);
-            $table->foreignId('property_id')->constrained()->default(null);
+            $table->foreignId('feature_id')->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('property_id')->constrained()->onDelete('cascade')->default(null);
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ class CreateFeatureTypeTable extends Migration
     {
         Schema::create('feature_type', function (Blueprint $table) {
             $table->bigIncrements('id'); 
-            $table->foreignId('feature_id')->constrained()->default(null);
-            $table->foreignId('type_id')->constrained()->default(null);
+            $table->foreignId('feature_id')->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('type_id')->constrained()->onDelete('cascade')->default(null);
             $table->timestamps();
         });
     }

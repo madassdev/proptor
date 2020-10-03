@@ -20,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace'=>'Auth', 'prefix'=>'auth'], function(){
-    Route::post('register', 'RegisterController@register');
-    Route::post('login', 'LoginController@login');
+    Route::post('register', 'ApiRegisterController@register');
+    Route::post('login', 'ApiLoginController@login');
     Route::post('logout', 'LoginController@logout');
     Route::post('forgot-password', 'PasswordResetController@forgotPassword');
     Route::post('reset-password', 'PasswordResetController@resetPassword');
@@ -51,6 +51,8 @@ Route::resource('features', 'FeatureController');
 Route::resource('plans', 'PlanController');
 Route::resource('properties', 'PropertyController');
 Route::post('sales', 'SaleController@addSale');
-Route::post('sales/{sale}/pay', 'SaleController@payForSale');
+Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware();
+Route::get('payments', 'PaymentController@payments');
+Route::post('payments/{payment}/confirm', 'PaymentController@confirmPayment');
 
 

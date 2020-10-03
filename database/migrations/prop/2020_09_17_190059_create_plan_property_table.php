@@ -15,8 +15,8 @@ class CreatePlanPropertyTable extends Migration
     {
         Schema::create('plan_property', function (Blueprint $table) {
             $table->bigIncrements('id'); 
-            $table->foreignId('plan_id')->constrained()->default(null);
-            $table->foreignId('property_id')->constrained()->default(null);
+            $table->foreignId('plan_id')->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('property_id')->constrained()->onDelete('cascade')->default(null);
             $table->timestamps();
             
         });

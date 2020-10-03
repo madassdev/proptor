@@ -17,7 +17,7 @@ class Sale extends Model
         'agent_id',
         'property_id',
         'plan_id',
-        'first_amount',
+        'next_min_amount',
         'total_amount',
         'code',
     ];
@@ -35,6 +35,11 @@ class Sale extends Model
     public function plan()
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function property()

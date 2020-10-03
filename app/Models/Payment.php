@@ -19,7 +19,14 @@ class Payment extends Model
 
     public const VALIDATION = [];
     
-    protected $fillable = [];
+    protected $fillable = [
+        "user_id",
+        "sale_id",
+        "amount",
+        "method",
+        "reference",
+        "status"
+    ];
 
     public function sale()
     {
@@ -34,5 +41,18 @@ class Payment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeMethod($query, $method)
+    {
+        if($method){
+
+            return $query->where('method', $method);
+        }
+    }
+    
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
     }
 }

@@ -3,45 +3,38 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
 
-    public function login(Request $request)
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $request->validate(
-        [
-            "email"=>"required|email",
-            "password" => "required"
-        ]
-        );
-
-        auth()->attempt($request->only(['email', 'password']));
-        $user = auth()->user();
-        
-        if(!$user)
-        {
-            return response()->json(["message"=>"Unauthenticated"],401);
-        }
-        
-        $token =  $user->createToken('proptor-token')->accessToken;
-        $roles = $user->roles->pluck('name')->toArray();
-        $permissions = $user->permissions->pluck('name')->toArray();
-
-        return response()->json(['message'=>'Login successful.',
-                                    'data' => ['token'=>$token, 
-                                    'user'=>$user, 
-                                    'user_roles'=>$roles,
-                                    'user_permissions'=>$permissions,
-                                    ]]);
-    }
-
-    public function logout()
-    {
-        auth()->guard('api')->user()->token()->revoke();
-        return response()->json(['success'=>true,'data' => ['message'=>'Successfully logged out']]);
+        $this->middleware('guest')->except('logout');
     }
 }

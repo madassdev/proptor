@@ -50,6 +50,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Agent::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
     
     public static function resolveFirstAndLastName(String $full_name)
     {
@@ -58,4 +63,5 @@ class User extends Authenticatable
         $names['last_name'] = array_key_exists(1, $split_name) ? $split_name[1]:null;
         return $names;
     }
+
 }
