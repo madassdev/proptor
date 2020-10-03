@@ -130,7 +130,7 @@ switch (request()->step) {
                         <div class="form-group py-3 text-center border-secondary m-3">
                             <label for="image url">Preview image</label> <br>
                             <img src="{{$property->image_url['url']}}" class="img-responsive col-md-3" alt="">
-                            <a href="{{route('admin.properties.edit-image')}}" class="text-primary">Edit</a>
+                            <a href="{{route('admin.properties.edit-image', $property)}}" class="text-primary">Edit</a>
                         </div>
                         <div class="form-group py-3 text-center border-secondary m-3">
                             <label for="image url">Gallery images</label> <br>

@@ -121,4 +121,9 @@ class PropertyController extends Controller
         return redirect(route('admin.properties.index'))->withSuccess('Property deleted successfully!');
         return response()->json(['message'=>'Property deleted successfully.']);
     }
+
+    public function editImage(Property $property)
+    {
+        return "Work in progress";
+    }
 }

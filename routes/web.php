@@ -31,6 +31,7 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function(){
     Route::get('/payments', 'PaymentController@index')->name('payments.index')->middleware('auth');
     Route::get('/payments/{payment}', 'PaymentController@show')->name('payments.show')->middleware('auth');
     Route::put('/payments/{payment}', 'PaymentController@update')->name('payments.update')->middleware('auth');
+    Route::get('/properties/{property}/edit-image', 'PropertyController@editImage')->name('properties.edit-image')->middleware('auth');
     Route::resource('properties', 'PropertyController')->middleware('auth');
     Route::resource('plans', 'PlanController')->middleware('auth');
 });
