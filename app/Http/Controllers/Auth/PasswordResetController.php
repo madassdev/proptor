@@ -32,7 +32,7 @@ class PasswordResetController extends Controller
         
         $password_reset_url = url("/reset-password?email=".$user->email."&token=".$password_reset->token);
 
-        Mail::to($user)->queue(new PasswordResetTokenMail($user, $password_reset_url));
+        Mail::to($user)->queue(new PasswordResetTokenMail($user, $password_reset_url, $password_reset->token));
 
         return response()->json([
             'message'=>true,
