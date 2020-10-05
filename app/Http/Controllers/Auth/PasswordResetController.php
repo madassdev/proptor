@@ -26,7 +26,7 @@ class PasswordResetController extends Controller
             ['email' => $user->email],
                 [
                     'email' => $user->email,
-                    'token' => Str::random(60)
+                    'token' => rand(100000, 999999)
                 ]
         );
         
