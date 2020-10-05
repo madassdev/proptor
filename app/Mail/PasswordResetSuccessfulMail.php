@@ -19,12 +19,9 @@ class PasswordResetSuccessfulMail extends Mailable
      *
      * @return void
      */
-    public $user;
-    public $generated_password;
-    public function __construct(User $user, String $generated_password)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->generated_password = $generated_password;
+        
     }
 
     /**
@@ -35,11 +32,7 @@ class PasswordResetSuccessfulMail extends Mailable
     public function build()
     {
         $message = (new MailMessage)
-        ->line('We received a request for your password reset')
-        ->line('Here is your reset token:')
-        ->line(new HtmlString(
-            "<strong style='font-size:25px; font-weight:bold; color:#ff8000'>".$this->token."</strong>"
-        ))
+        ->line('Your password reset was successful.')
         ;
 
     return $this->markdown('vendor.notifications.email', $message->data());

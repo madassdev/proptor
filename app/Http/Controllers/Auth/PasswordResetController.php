@@ -46,6 +46,7 @@ class PasswordResetController extends Controller
         $request->validate([
             "email" => 'required|email|exists:users,email',
             "token" => 'required|string|exists:password_resets,token',
+            "password" => 'required|string|min:6'
         ]);
 
         $password_reset = PasswordReset::where([
@@ -60,18 +61,18 @@ class PasswordResetController extends Controller
         $user = User::where('email', $password_reset->email)->firstOrFail();
         
         $generated_password = strtolower(Str::random(8));
-        $user->password = bcrypt($generated_password);
+        $user->password = bcrypt($request->password);
         $token =  $user->createToken('proptor-token')->accessToken;
         $user->save();
         
         // Delete the reset token
         $password_reset->delete();
 
-        Mail::to($user)->queue(new PasswordResetSuccessfulMail($user, $generated_password));
+        Mail::to($user)->queue(new PasswordResetSuccessfulMail());
 
         return response()->json([
             'message'=>true,
-            'data'=>['message' => 'Your password has been reset. We have e-mailed your new password!', 'data'=>[
+            'data'=>['message' => 'Your password has been reset.', 'data'=>[
                 "user"=>$user,
                 "token"=>$token
             ]]
