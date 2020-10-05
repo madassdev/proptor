@@ -21,7 +21,7 @@ class PasswordResetSuccessfulMail extends Mailable
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -36,6 +36,5 @@ class PasswordResetSuccessfulMail extends Mailable
         ;
 
     return $this->markdown('vendor.notifications.email', $message->data());
-        return $this->view('email.auth.password-reset-success');
     }
 }
