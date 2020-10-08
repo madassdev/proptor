@@ -15,13 +15,13 @@ class FeatureTypeSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        $features = collect(['Bath', 'Lounge', 'Close to town', 'Transport access', 'Beach', 'Rivers', 'Islands']
-                            + $faker->words(10,false));
+        // $faker = \Faker\Factory::create();
+        // $features = collect(['Bath', 'Lounge', 'Close to town', 'Transport access', 'Beach', 'Rivers', 'Islands']
+        //                     + $faker->words(10,false));
         
-        $features->map(function($feature){
-            Feature::create(['name'=>$feature]);
-        });
+        // $features->map(function($feature){
+        //     Feature::create(['name'=>$feature]);
+        // });
 
         // $types = collect(['Land', 'Building', 'Apartment']);
 

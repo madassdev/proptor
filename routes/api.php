@@ -46,12 +46,23 @@ Route::group(['middleware'=>'auth:api'], function(){
 
     
 });
+
+Route::group(['prefix'=>'app'], function(){
+    Route::get('details', 'AppController@getDetails');
+    Route::get('keys/payment', 'AppController@getPaymentKeys');
+    Route::post('keys/payment', 'AppController@savePaymentKeys')->middleware('auth:api');
+});
+
+
 Route::resource('types', 'TypeController');
 Route::resource('features', 'FeatureController');
 Route::resource('plans', 'PlanController');
+
 Route::resource('properties', 'PropertyController');
+Route::post('properties/{property}/view', 'PropertyController@view')->middleware('auth:api');
+
 Route::post('sales', 'SaleController@addSale');
-Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware();
+Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware('auth:api');
 Route::get('payments', 'PaymentController@payments');
 Route::post('payments/{payment}/confirm', 'PaymentController@confirmPayment');
 

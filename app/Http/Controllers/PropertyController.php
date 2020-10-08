@@ -38,6 +38,15 @@ class PropertyController extends Controller
         return response()->json(['message'=>'Property created successfully.', 'data'=>$property]);
     }
 
+    public function view(Property $property)
+    {
+        $property->increment('views');
+
+        return response()->json(['message'=>'Property view successful', 'data'=>[
+            'property'=>$property
+        ]]);
+    }
+
     public function update(PropertyUpdateRequest $request, Property $property)
     {
         $property->update($request->validated());
