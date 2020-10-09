@@ -22,10 +22,12 @@ class Plan extends Model
         'description' => ['string'],
         'extra_interest' => ['required', 'sometimes', 'numeric', 'min:1', 'max:100'],
         'duration' => ['required', 'sometimes', 'numeric', 'min:1'],
+        'min_first_payment' => ['required', 'sometimes', 'numeric', 'min:1'],
+        'first_payment_formular' => ['required', 'sometimes', 'string', 'in:percentage,static-price'],
         'status' => ['string', 'in:active,inactive,pending,canceled'],
     ];
 
-    protected $fillable = ['name', 'description', 'extra_interest', 'duration', 'status'];
+    protected $fillable = ['name', 'description', 'extra_interest', 'duration', 'status', 'min_first_payment', 'first_payment_formular'];
 
     public function sales()
     {
