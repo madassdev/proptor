@@ -18,18 +18,18 @@ class Property extends Model
     }
 
     public const VALIDATION = [
+        'name' => ['string', 'unique:properties,name'],
         'status' => ['string', 'in:active,inactive,pending,canceled'],
         'type' => ['required', 'string', 'in:land,rent,property,building'],
-        'name' => ['string', 'unique:properties,id'],
         'slug' => ['string'],
         'price' => ['required', 'sometimes', 'numeric', 'min:1'],
-        'general_price' => ['numeric', 'min:1','gte:price|min:0'],
+        'general_price' => ['numeric', 'min:1','gte:price','min:0'],
         'units' => ['numeric', 'min:1', 'nullable'],
         'description' => ['string', 'nullable'],
         'short_description' => ['string', 'nullable'],
 
-        'image_url' => ['string', 'nullable'],
-        'gallery_images_url' => ['string', 'nullable'],
+        'image_url' => ['array', 'nullable'],
+        'gallery_images_url' => ['array', 'nullable'],
 
         'state' => ['string', 'nullable'],
         'city' => ['string', 'nullable'],
@@ -38,7 +38,7 @@ class Property extends Model
 
         'length' => ['string', 'nullable'],
         'width' => ['string', 'nullable'],
-        'size' => ['numeric', 'nullable'],
+        'size' => ['string', 'nullable'],
         'lat' => ['string', 'nullable'],
         'long' => ['string', 'nullable'],
 

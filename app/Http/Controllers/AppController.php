@@ -59,11 +59,11 @@ class AppController extends Controller
             if ($validator->fails()) {
                 return response()->json([$validator->errors()], 422);
             }
-            $secretKeyValidation = PaymentService::validatePaystackKey($request->paystack['secret_key']);
+            // $secretKeyValidation = PaymentService::validatePaystackKey($request->paystack['secret_key']);
 
-            if (!$secretKeyValidation->status) {
-                // return response()->json('The Paystack secret key is invalid.', 422);
-            }
+            // if (!$secretKeyValidation->status) {
+            //     // return response()->json('The Paystack secret key is invalid.', 422);
+            // }
 
             $paystack_config = PaystackConfig::find(1);
 
