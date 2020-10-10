@@ -59,7 +59,7 @@ Route::resource('features', 'FeatureController');
 Route::resource('plans', 'PlanController');
 
 Route::resource('properties', 'PropertyController');
-Route::post('properties/{property}/view', 'PropertyController@view')->middleware('auth:api');
+Route::post('properties/{property}/view', 'PropertyController@view');
 
 Route::post('sales', 'SaleController@addSale');
 Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware('auth:api');
