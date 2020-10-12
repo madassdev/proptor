@@ -38,8 +38,20 @@
             </a>
         </li>
         <li class="c-sidebar-nav-title">Plans</li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-label" href="{{route('admin.plans.index')}}"> All plans</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-label" href="{{route('admin.plans.create')}}"> Create plan</a></li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-label" href="{{route('admin.plans.index')}}"> 
+                <i class="cil-apps-settings text-warning c-sidebar-nav-icon"></i>
+                All plans
+            </a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-label" href="{{route('admin.plans.create')}}"> 
+                <i class="cil-plus text-success c-sidebar-nav-icon"></i>
+                Create plan
+            </a>
+        </li>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 780px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 469px;"></div></div>
     </ul>
     <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-unfoldable"></button>

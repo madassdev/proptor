@@ -20,7 +20,7 @@ class Plan extends Model
     public const VALIDATION = [
         'name' => ['required', 'sometimes', 'string', 'unique:plans,name,NULL,id,deleted_at,NULL,'],
         'description' => ['string'],
-        'extra_interest' => ['required', 'sometimes', 'numeric', 'min:1', 'max:100'],
+        'extra_interest' => ['required', 'sometimes', 'numeric', 'max:100'],
         'duration' => ['required', 'sometimes', 'numeric', 'min:1'],
         'min_first_payment' => ['required', 'sometimes', 'numeric', 'min:1'],
         'first_payment_formular' => ['required', 'sometimes', 'string', 'in:percentage,static-price'],
