@@ -3,19 +3,14 @@
 namespace App\Models;
 
 use App\Observers\PropertyObserver;
+use IFrankSmith\Sluggable\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    public static function boot()
-    {
-        parent::boot();
-        Property::observe(new PropertyObserver());
-    }
+    use HasFactory, SoftDeletes, Sluggable;
 
     public const VALIDATION = [
         'name' => ['string', 'unique:properties,name'],
@@ -99,6 +94,14 @@ class Property extends Model
     public function min_payable(Plan $plan)
     {
         return $plan->extra_interest;
+    }
+
+    public function sluggable()
+    {
+        return [
+            "column" => "slug",
+            "source" => "name",
+        ];
     }
 
 }

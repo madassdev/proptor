@@ -25,6 +25,9 @@ class PropertyUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return Property::VALIDATION;
+        $rules = Property::VALIDATION;
+        $rules['name'] = ['required', 'string', 'unique:properties,name,'.$this->property->id,];
+        return $rules;
+
     }
 }

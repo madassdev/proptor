@@ -22,6 +22,10 @@ class Sale extends Model
         'code',
     ];
 
+    protected $appends = [
+        "percent_paid"
+    ];
+
     public function agent()
     {
         return $this->belongsTo(Agent::class);
@@ -50,5 +54,10 @@ class Sale extends Model
     public function min_first_pay()
     {
         return $this->property;
+    }
+
+    public function getPercentPaidAttribute()
+    {
+        return ($this->total_paid * 100)/$this->total_amount;
     }
 }

@@ -59,7 +59,10 @@ Route::resource('features', 'FeatureController');
 Route::resource('plans', 'PlanController');
 
 Route::resource('properties', 'PropertyController');
+Route::post('properties/search', 'PropertyController@search');
 Route::post('properties/{property}/view', 'PropertyController@view');
+Route::post('properties/{property}/favorite', 'PropertyController@favorite');
+Route::post('properties/{property}/unfavorite', 'PropertyController@unfavorite');
 
 Route::post('sales', 'SaleController@addSale');
 Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware('auth:api');

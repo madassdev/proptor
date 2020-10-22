@@ -21,7 +21,7 @@ class SaleController extends Controller
 
     public function index(Request $request)
     {
-        $sales = Sale::with('user', 'agent', 'property')->orderBy('updated_at', 'DESC')->paginate(10);
+        $sales = Sale::with('user', 'agent', 'property')->orderBy('updated_at', 'DESC')->paginate(20);
         return view('admin.sales.index', compact('sales'));
     }
 

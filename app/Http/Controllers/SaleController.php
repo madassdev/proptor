@@ -29,7 +29,7 @@ class SaleController extends Controller
         // Validate request
         $request->validate([
             "property_id" => "required|exists:properties,id,deleted_at,NULL",
-            "plan_id" => ["required","exists:plans,id"],
+            "plan_id" => ["required","exists:plans,id,deleted_at,NULL"],
         ]);
 
         
@@ -42,11 +42,15 @@ class SaleController extends Controller
             decisions which is dependent on either or both of the Property and Plan models.
         */
 
-        $min_payable = 100000; // To be calculated
-        $total_amount = 12000000; // To be calculated
-
         $plan = $property->plans->firstWhere('id', $request->plan_id);
-
+        
+        // Sale pricing calculations.
+        $min_payable = $property->price;
+        $total_amount = $property->price + $plan->extra_interest * 0.01 * $property->price;
+        if($plan->first_payment_formular == "percentage")
+        {
+            $min_payable = $plan->min_first_payment * 0.01 * $property->price;
+        }
         
         if(!$plan){
             return response()->json(['message'=>'Plan cannot be used for this property'], 403);

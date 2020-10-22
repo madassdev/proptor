@@ -35,6 +35,9 @@
         <div class="row">
             <div class="col-md-12 mx-auto">
                 <div class="card">
+                    <div class="card-header bg-gradient-dark">
+                        iuiouyi
+                    </div>
                     <div class="card-body">
                         <strong>
                             Sales
@@ -65,7 +68,10 @@
                                     <a href="{{route('admin.sales.show', $sale)}}" class="text-primary">
                                         <strong>
                                             {!!config('payment.naira')!!}{{number_format($sale->total_paid)}}
-                                        </strong>
+                                        </strong> <br>
+                                        <div class="progress mt-3" style="height: 3px;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated border-success bg-success" role="progressbar" style="width: {{$sale->percent_paid}}%;" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </a>
                                 </td>
                                 <td>

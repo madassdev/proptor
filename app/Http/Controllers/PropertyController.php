@@ -71,4 +71,16 @@ class PropertyController extends Controller
         $property->delete();
         return response()->json(['message'=>'Property deleted successfully.']);
     }
+
+    public function search(Request $request)
+    {
+        $term = $request->q;
+        $properties = Property::where('name', 'LIKE', '%'.$term.'%')->with('plans')->get();
+        return response()->json(['data'=>$properties],200);
+    }
+
+    public function favorite(Property $property)
+    {
+        return 123;
+    }
 }

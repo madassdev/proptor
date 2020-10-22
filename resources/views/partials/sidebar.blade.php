@@ -17,6 +17,12 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{route('admin.users.index')}}">
+                <i class="cil-user text-info c-sidebar-nav-icon"></i>
+                 Users
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{route('admin.payments.index')}}"> 
                 <i class="cil-money text-warning c-sidebar-nav-icon"></i>
                 Payments

@@ -12,6 +12,9 @@ class PropertyObserver
         // Create a unique slug for the model
         $slug = $property->slug ?? $property->name;
         $property->slug = Helper::slugify($slug, Property::class);
+
+        dd("escaped");
+        dd($property);
         
     }
 
