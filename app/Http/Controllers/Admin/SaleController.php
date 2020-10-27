@@ -43,6 +43,18 @@ class SaleController extends Controller
 
     public function autopay(Sale $sale, Request $request)
     {
-        return [$sale, $request];
+        $request->validate([
+            "amount"=>"required|numeric|min:1"
+        ]);
+
+        $sale->payments()->create([
+            "user_id" => $sale->user_id,
+            "amount" => $request->amount,
+            "method" => "autopaid",
+            "reference" => "autopaid",
+            "status" => "success"
+        ]);
+        
+        return [$sale, $request->all()];
     }
 }

@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use IFrankSmith\Sluggable\Traits\Sluggable;
+
+use App\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
 
     public const VALIDATION = [
         'name' => ['string', 'unique:properties,name'],

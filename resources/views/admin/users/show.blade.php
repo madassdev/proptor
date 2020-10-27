@@ -28,9 +28,9 @@
                         Next due date: Jan 22 <br>
                         Plan: Basic <br>
                         <p>
-                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#{{$sale->code}}" aria-expanded="true" aria-controls="collapseExample">Add Payment</a>
+                            <button class="btn btn-primary btn-sm collapsed" type="button" data-toggle="collapse" data-target="#{{$sale->code}}" aria-expanded="false" aria-controls="{{$sale->code}}">Add Payment</button>
                         </p>
-                        <div class="collapse show" id="{{$sale->code}}" style="">
+                        <div class="collapse" id="{{$sale->code}}" style="">
                             <form action="{{route('admin.sales.autopay', $sale)}}" method="post">
                                 @csrf
                                 <div class="form-group">

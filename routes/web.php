@@ -33,7 +33,7 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function(){
 
     Route::get('/sales', 'SaleController@index')->name('sales.index')->middleware('auth');
     Route::get('/sales/{sale}', 'SaleController@show')->name('sales.show')->middleware('auth');
-    Route::get('/sales/{sale}/autopay', 'SaleController@autopay')->name('sales.autopay')->middleware('auth');
+    Route::post('/sales/{sale}/autopay', 'SaleController@autopay')->name('sales.autopay')->middleware('auth');
 
     Route::get('/payments', 'PaymentController@index')->name('payments.index')->middleware('auth');
     Route::get('/payments/{payment}', 'PaymentController@show')->name('payments.show')->middleware('auth');

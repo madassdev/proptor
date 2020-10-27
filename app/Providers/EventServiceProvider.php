@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         \App\Events\PaymentSuccess::class => [
-            \App\Listeners\SendPaymentApprovedNotification::class,
             \App\Listeners\UpdateSaleRecord::class,
+            \App\Listeners\SendPaymentApprovedNotification::class,
 
         ],
 
