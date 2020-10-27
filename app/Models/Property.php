@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Observers\PropertyObserver;
 use IFrankSmith\Sluggable\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
