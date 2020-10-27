@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereStatus('registered-for')->latest()->paginate(10);
+        $users = auth()->user()->agent->users()->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -36,14 +36,23 @@ class UserController extends Controller
         $user = User::create([
             "full_name" => $request->full_name,
             "email" => $request->email,
+            "mobile" => $request->mobile,
             "password" => bcrypt($generated_password),
             "v_code" => $generated_password,
             "status" => "registered-for"
         ]);
+
+        auth()->user()->agent->users()->attach($user);
         
         event(new AdminCreatedUser($user));
 
         return redirect(route('admin.users.index'))->withSuccess('User created successfully');
+    }
+
+    public function show(User $user)
+    {
+        $user->load('sales.payments', 'sales.property', 'sales.plan');
+        return view('admin.users.show', compact('user'));
     }
 
     public function salesCreate(User $user)

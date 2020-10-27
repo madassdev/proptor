@@ -55,6 +55,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+
     
     public static function resolveFirstAndLastName(String $full_name)
     {

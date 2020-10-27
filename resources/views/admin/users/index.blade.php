@@ -28,13 +28,16 @@
     <div class="row">
         <div class="col-md-12 mx-auto">
             <div class="card">
-                <div class="card-body">
-                    <strong>
+                <div class="card-header">
+                <strong>
                         Users
                     </strong>
+                    <a href="{{route('admin.users.create')}}" class="btn btn-primary float-right">Create user</a>
                     <span class="float-right">
                         {{$users->links("pagination::bootstrap-4")}}
                     </span>
+                </div>
+                <div class="card-body">
                     <table class="table table-responsive-sm table-condensed">
                         <tr>
                             <th>Name</th>

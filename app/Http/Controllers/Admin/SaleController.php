@@ -40,4 +40,9 @@ class SaleController extends Controller
         return redirect(route('admin.properties.index'))->withSuccess('Property deleted successfully!');
         return response()->json(['message'=>'Property deleted successfully.']);
     }
+
+    public function autopay(Sale $sale, Request $request)
+    {
+        return [$sale, $request];
+    }
 }
