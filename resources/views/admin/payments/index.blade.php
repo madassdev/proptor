@@ -12,7 +12,8 @@
     $method = [
         "paystack"=>"info",
         "flutterwave"=>"warning",   
-        "bank-transfer"=>"dark" 
+        "bank-transfer"=>"dark", 
+        "autopaid"=>"success", 
     ];
 
     $paystack_active = "secondary";

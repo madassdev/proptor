@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PaymentSuccess;
 use App\Http\Requests\PropertyCreateRequest;
 use App\Http\Requests\PropertyUpdateRequest;
 use App\Models\Feature;
@@ -47,14 +48,25 @@ class SaleController extends Controller
             "amount"=>"required|numeric|min:1"
         ]);
 
-        $sale->payments()->create([
+        if($sale->payment_status == 'completed')
+        {
+            return redirect()->back()->withError('The sale has already been completed');
+        }
+
+        $payment = $sale->payments()->create([
+            "sale_id"=>$sale->id,
+            "user_id"=>$sale->user_id
+
+        ],[
             "user_id" => $sale->user_id,
             "amount" => $request->amount,
             "method" => "autopaid",
             "reference" => "autopaid",
             "status" => "success"
         ]);
-        
-        return [$sale, $request->all()];
+
+        event(new PaymentSuccess($payment));
+
+            return redirect()->back()->withSuccess('Sale payment succesfully added.');
     }
 }

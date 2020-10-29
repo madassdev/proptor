@@ -30,8 +30,12 @@ class SendPaymentApprovedNotification
      */
     public function handle(PaymentSuccess $event)
     {
-        $admins = User::role('admin')->get();
-        Notification::send($admins, new AdminPaymentSuccessfulNotification($event->payment));
+        if($event->payment->status != 'autopaid')
+        {
+            $admins = User::role('admin')->get();
+            Notification::send($admins, new AdminPaymentSuccessfulNotification($event->payment));
+        }
+        
         Notification::send($event->payment->user, new PaymentSuccessfulNotification($event->payment));
     }
 }

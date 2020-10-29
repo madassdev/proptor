@@ -28,7 +28,7 @@ class UpdateSaleRecord
     public function handle(PaymentSuccess $event)
     {
         $payment =  $event->payment;
-        $payment->sale()->increment('total_paid', $payment->amount);
-        // $
+        $payment->sale->total_paid += $payment->amount;
+        $payment->sale->save(); 
     }
 }

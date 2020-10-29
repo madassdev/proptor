@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\SaleObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,7 @@ class Sale extends Model
         'next_min_amount',
         'total_amount',
         'code',
+        'payment_status'
     ];
 
     protected $appends = [
@@ -59,5 +61,11 @@ class Sale extends Model
     public function getPercentPaidAttribute()
     {
         return ($this->total_paid * 100)/$this->total_amount;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        Sale::observe(new SaleObserver());
     }
 }

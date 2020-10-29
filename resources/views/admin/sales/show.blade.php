@@ -14,7 +14,8 @@
     $method = [
         "paystack"=>"info",
         "flutterwave"=>"warning",   
-        "bank-transfer"=>"dark" 
+        "bank-transfer"=>"dark", 
+        "autopaid"=>"success", 
     ];
 
     $paystack_active = "secondary";
@@ -34,70 +35,51 @@
 @section('content')
 <div id="ui-view"><div><div class="fade-in">
     <div class="row justify-content-center">
-        <div class="col-md-12 mx-auto">
+        <div class="col-md-6">
             <div class="card card-accent-primary">
                 <div class="card-body  px-5 py-3">
                     <div class="row">
-                        <div class="col-md-4">
-                            Remaining amount
-                            <p class="text-danger h3">
-                                {!!config('payment.naira').number_format($sale->total_amount - $sale->total_paid)!!}
+                        <div class="col-md-12 p-1 text-center">
+                            <p class="h3 text-primary mb-0">
+                                {{ucfirst($sale->property->name)}}
                             </p>
-                            Total paid
-                            <p class="text-success h5">
-                                {!!config('payment.naira').number_format($sale->total_paid)!!}
-                            </p>
-                            
-                            Property amount
-                            <p class="text-dark font-weight-bolder">
-                                {!!config('payment.naira').number_format($sale->total_amount)!!}
-                            </p>
+                            <small>{{$sale->property->address}}</small>
                         </div>
-                        <div class="col-md-4">
-                            <p class="mb-0">
-                                Property
+                    </div>
+                    <div class="row m-1">
+                        <div class="col-md-4 p-3 text-center card bg-gradient-light">
+                            <i class="cil-check-circle text-success h3"></i>
+                            <p class="mb-0 h5">
+                                {!!config('payment.naira')!!}{{number_format($sale->total_paid)}}
                             </p>
-                            <p class="text-dark h3 mb-0">
-                                {{ucfirst($sale->property->name)}} <br>
-                            </p>
-                            <small class="text-muted">
-                                {{$sale->property->address??"Property address appears here"}}
+                            <small>
+                                Total paid 
                             </small>
-                            <p class="mt-1 mb-0">
-                                <small>
-                                    Plan
-                                </small> 
-                            </p>
-                            <p class="text-info font-weight-bolder">
-                                {{strtoupper($sale->plan->name)}}
-                            </p>
-                            <a href="{{route('admin.sales.show', $sale)}}" class="btn btn-primary btn-sm font-weight-bold">Sale: {{$sale->code}}</a>
                         </div>
-                        <div class="col-md-4">
-                            User details
-                            <p class="text-dark h3">
-                                {{ucfirst($sale->user->full_name)}}
+                        <div class="col-md-4 p-3 text-center card bg-gradient-light">
+                            <i class="cil-warning h3 text-warning"></i>
+                            <p class="mb-0 h5">
+                                {!!config('payment.naira')!!}{{number_format(max($sale->total_amount - $sale->total_paid,0))}}
                             </p>
-                            <p class="text-dark mb-1">
-                                Agent:
-                                <span class="h5">
-                                    {{ucfirst($sale->agent->namse ?? 'No agent')}} 
-                                </span>
+                            <small>
+                                Total remaining
+                            </small>
+                        </div>
+                        <div class="col-md-4 p-3 text-center card bg-gradient-light">
+                            <i class="cil-star h3 text-primary"></i>
+                            <p class="mb-0 h5">
+                                {{$sale->plan->name}}
                             </p>
-                            <p class="text-success h3">
-                                {!!config('payment.naira').number_format($sale->total_paid)!!}
-                            </p>
-                            
-                            Property amount
-                            <p class="text-dark font-weight-bolder">
-                                {!!config('payment.naira').number_format($sale->total_amount)!!}
-                            </p>
+                            <small>
+                                Plan
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                </div>
             </div>
+        </div>
+
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-gradient-primary text-white">
                     <p class="h3 m-0 text-center">
@@ -105,37 +87,43 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        @forelse($sale->payments as $payment)
-                        <div class="col-md-3">
-                            <a href="{{route('admin.payments.show',$payment)}}">
-                                <div class="card card-accent-{{$method[$payment->method]}} p-2">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img src="{{asset('images/'.$payment->method.'_logo.png')}}" alt="" class="img-fluid img-responsive">
-                                            <span class="text-secondary">
-                                                <!-- {{ucfirst($payment->method)}} -->
-                                            </span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <span class="text text-dark h5">
-                                                {!!config('payment.naira')!!}{{number_format($payment->amount)}}
-                                            </span> 
-                                            <p class="mb-0">
-                                                <span class="badge badge-{{$status[$payment->status]}}">
-                                                    {{ucfirst($payment->status)}}
-                                                </span>
-                                            </p>
-                                            <small>
-                                                {{$payment->created_at->format('Y/M/d')}}
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            </div>
-                        @empty
-                        @endforelse
+                    <div class="row justify-content-center">
+                        <table class="table table-striped table-responsive">
+                            <thead>
+                                <th>S/N</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Method</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </thead>
+                            @forelse($sale->payments as $payment)
+                            @php $count++; @endphp
+                            <tr>
+                                <td>{{$count}}</td>
+                                <td>{!!config('payment.naira')!!}{{number_format($payment->amount)}}</td>
+                                <td>
+                                    <span class="badge badge-{{$status[$payment->status]}}">
+                                        {{ucfirst($payment->status)}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-{{$method[$payment->method]}}">
+                                        {{ucfirst($payment->method)}}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{$payment->created_at->format('Y/M/d')}}
+                                </td>
+                                <td>
+                                    <a href="{{route('admin.payments.show',$payment)}}">View</a>
+                                </td>
+                            </tr>
+                            @empty
+
+                            @endforelse
+
+                        </table>
                     </div>
                     <span class="float-right">
                         View more: {{$sale->payments->render("pagination::bootstrap-4")}}
