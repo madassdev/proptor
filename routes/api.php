@@ -61,10 +61,14 @@ Route::resource('plans', 'PlanController');
 Route::resource('properties', 'PropertyController');
 Route::post('properties/search', 'PropertyController@search');
 Route::post('properties/{property}/view', 'PropertyController@view');
-Route::post('properties/{property}/favorite', 'PropertyController@favorite');
-Route::post('properties/{property}/unfavorite', 'PropertyController@unfavorite');
+Route::post('properties/favorites', 'PropertyController@favorites')->middleware('auth:api');
+Route::post('properties/{property}/favorite', 'PropertyController@favorite')->middleware('auth:api');
+Route::post('properties/{property}/unfavorite', 'PropertyController@unfavorite')->middleware('auth:api');
 
-Route::post('sales', 'SaleController@addSale');
+Route::get('analytics', 'SaleController@analytics')->middleware('auth:api');
+
+Route::post('sales', 'SaleController@addSale')->middleware('auth:api');
+Route::get('sales', 'SaleController@index')->middleware('auth:api');
 Route::post('sales/{sale}/pay', 'SaleController@payForSale')->middleware('auth:api');
 Route::get('payments', 'PaymentController@payments');
 Route::post('payments/{payment}/confirm', 'PaymentController@confirmPayment');

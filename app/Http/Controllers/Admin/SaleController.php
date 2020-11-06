@@ -54,10 +54,6 @@ class SaleController extends Controller
         }
 
         $payment = $sale->payments()->create([
-            "sale_id"=>$sale->id,
-            "user_id"=>$sale->user_id
-
-        ],[
             "user_id" => $sale->user_id,
             "amount" => $request->amount,
             "method" => "autopaid",

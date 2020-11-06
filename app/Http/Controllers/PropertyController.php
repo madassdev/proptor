@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PropertyCreateRequest;
 use App\Http\Requests\PropertyUpdateRequest;
+use App\Models\Favorite;
 use App\Models\Feature;
 use App\Models\Property;
 use Illuminate\Http\Request;
@@ -81,6 +82,30 @@ class PropertyController extends Controller
 
     public function favorite(Property $property)
     {
-        return 123;
+        $user = auth()->user();
+        $property->favorites()->updateOrCreate([
+            "user_id" => $user->id,
+        ]);
+
+        return response()->json([
+            'message' => 'Property favorited succesfully.',
+            'property' => $property
+        ]);
+    }
+
+    public function favorites()
+    {
+        return auth()->user()->favorites;
+    }
+
+    public function unfavorite(Property $property)
+    {
+        $user = auth()->user();
+        $favorite = Favorite::whereUserId($user->id)->wherePropertyId($property->id)->first();
+        if($favorite)$favorite->forceDelete();
+
+        return response()->json([
+            'message'=>'Property unfavorited successfully'
+        ]);
     }
 }

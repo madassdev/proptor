@@ -86,6 +86,11 @@ class Property extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
     public function type()
     {
         return $this->belongsTo((Type::class));

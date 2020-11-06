@@ -20,6 +20,11 @@ class SaleController extends Controller
 
     }
 
+    public function index()
+    {
+        return auth()->user()->sales;
+    }
+
     public function addSale(Request $request)
     {
         $user = $agent = User::find(1);
@@ -131,6 +136,24 @@ class SaleController extends Controller
             ]
         ]);
 
+    }
+
+    public function analytics()
+    {
+        $user = auth()->user();
+        $response = [
+            "properties"=>[
+                "total"=>$user->sales->count(),
+                "complete_payments"=>$user->sales->where('payment_status', 'completed')->count(),
+                "incomplete_payments"=>$user->sales->where('payment_status', '!=', 'completed')->count(),
+                "paying_payments"=>$user->sales->where('payment_status', 'paying')->count(),
+                "unpaid_payments"=>$user->sales->where('payment_status', 'upaid')->count(),
+            ],
+            "total_paid"=>$user->sales->sum('total_paid'),
+            "total_amount"=>$user->sales->sum('total_amount'),
+            "total_unpaid"=>$user->sales->sum('total_unpaid'),
+        ];
+        return $response;
     }
 
 }

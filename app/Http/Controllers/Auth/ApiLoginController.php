@@ -27,7 +27,7 @@ class ApiLoginController extends Controller
             return response()->json(["message"=>"Unauthenticated"],401);
         }
         
-        $token =  $user->createToken('proptor-token')->accessToken;
+        $token =  $user->createToken('proptor-token')->plainTextToken;
         $roles = $user->roles->pluck('name')->toArray();
         $permissions = $user->permissions->pluck('name')->toArray();
 

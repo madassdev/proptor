@@ -75,6 +75,26 @@
                             </small>
                         </div>
                     </div>
+
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <p>
+                                    <button class="btn btn-primary btn-sm collapsed" type="button" data-toggle="collapse" data-target="#{{$sale->code}}" aria-expanded="false" aria-controls="{{$sale->code}}">Add Payment</button>
+                                </p>
+                                <div class="collapse" id="{{$sale->code}}" style="">
+                                    <form action="{{route('admin.sales.autopay', $sale)}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="">Amount</label>
+                                            <input type="number" name="amount" id="" class="form-control" placeholder="Amount">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-sm btn-success float-right">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -126,7 +146,7 @@
                         </table>
                     </div>
                     <span class="float-right">
-                        View more: {{$sale->payments->render("pagination::bootstrap-4")}}
+                       {{$sale->payments->render("pagination::bootstrap-4")}}
                     </span>
                 </div>
             </div>

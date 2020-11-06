@@ -25,7 +25,8 @@ class Sale extends Model
     ];
 
     protected $appends = [
-        "percent_paid"
+        "percent_paid",
+        "total_unpaid"
     ];
 
     public function agent()
@@ -61,6 +62,11 @@ class Sale extends Model
     public function getPercentPaidAttribute()
     {
         return ($this->total_paid * 100)/$this->total_amount;
+    }
+
+    public function getTotalUnpaidAttribute()
+    {
+        return $this->total_amount - $this->total_paid;
     }
 
     public static function boot()
