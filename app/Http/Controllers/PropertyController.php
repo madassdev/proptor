@@ -97,7 +97,6 @@ class PropertyController extends Controller
     {
         $favorites = Favorite::whereUserId(auth()->user()->id)->with('property')->get();
         return response()->json([
-            'message' => 'Property favorited succesfully.',
             'favorites' => $favorites
         ]);
     }
