@@ -35,7 +35,7 @@ class ApiRegisterController extends Controller
         // }
         
         // Login the user
-        $token =  $user->createToken('proptor-token')->accessToken;
+        $token =  $user->createToken('proptor-token')->plainTextToken;
         $roles = $user->roles->pluck('name')->toArray();
         $permissions = $user->permissions->pluck('name')->toArray();
         return response()->json(['message'=>'User created successfully',
