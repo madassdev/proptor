@@ -96,9 +96,9 @@ class PropertyController extends Controller
     public function favorites()
     {
         $favorites = Favorite::whereUserId(auth()->user()->id)->with('property')->get();
-        return response()->json([
+        return response()->json(["data"=>[
             'favorites' => $favorites
-        ]);
+        ]]);
     }
 
     public function unfavorite(Property $property)
