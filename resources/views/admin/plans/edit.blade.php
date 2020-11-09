@@ -29,30 +29,21 @@
                     <form action="{{route('admin.plans.update', $plan)}}" method="post" class="">
                         @csrf
                         @method('put')
-                        <div class="form-group">
-                            <label for="company">Name</label>
-                            <input class="form-control @error('name') is-invalid @enderror" value="{{ $plan->name }}" name="name" id="company" type="text" placeholder="Plan name" required>
-                            <input type="hidden" name="type" value="land">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
                         <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="city">Duration(in months)</label>
-                                <input class="form-control @error('duration') is-invalid @enderror" id="price" value="{{ $plan->duration }}" name="duration" type="number" placeholder="Enter plan duration in months">
-                                @error('duration')
+                            <div class="form-group col-md-6">
+                                <label for="company">Name</label>
+                                <input class="form-control @error('name') is-invalid @enderror" value="{{ $plan->name }}" name="name" id="company" type="text" placeholder="Plan name" required>
+                                <input type="hidden" name="type" value="land">
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-sm-6">
-                                <label for="city">Extra interest</label>
-                                <input class="form-control @error('extra_interest') is-invalid @enderror" id="price" value="{{ $plan->extra_interest }}" name="extra_interest" type="number" placeholder="Enter value">
-                                @error('extra_interest')
+                            <div class="form-group col-md-6">
+                                <label for="city">Duration(in months)</label>
+                                <input class="form-control @error('duration') is-invalid @enderror" id="price" value="{{ $plan->duration }}" name="duration" type="number" placeholder="Enter plan duration in months">
+                                @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

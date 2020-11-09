@@ -27,7 +27,7 @@ class PlanController extends Controller
         $rules['duration'] = ['required', 'numeric','min:1'];
 
         $request->validate($rules);
-        
+
         $plan = Plan::create($request->all());
         return redirect(route('admin.plans.index'))->withSuccess('Plan created successfully!');
     }
@@ -37,8 +37,11 @@ class PlanController extends Controller
         return view('admin.plans.edit', compact('plan'));
     } 
 
-    public function update(PlanUpdateRequest $request, Plan $plan)
+    public function update(Request $request, Plan $plan)
     {
+        $rules['name'] = ['required', 'sometimes', 'string', 'unique:plans,name,'.$plan->id.',id,deleted_at,NULL'];
+        $rules['duration'] = ['required', 'sometimes', 'numeric', 'min:1'];
+
         $plan->update($request->all());
         return redirect(route('admin.plans.index'))->withSuccess('Plan updated successfully');
     }
