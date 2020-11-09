@@ -21,8 +21,13 @@ class PlanController extends Controller
         return view('admin.plans.create');
     }
 
-    public function store(PlanCreateRequest $request)
+    public function store(Request $request)
     {
+        $rules['name'] = ['required', 'string', 'unique:plans,name,NULL,id'];
+        $rules['duration'] = ['required', 'numeric','min:1'];
+
+        $request->validate($rules);
+        
         $plan = Plan::create($request->all());
         return redirect(route('admin.plans.index'))->withSuccess('Plan created successfully!');
     }

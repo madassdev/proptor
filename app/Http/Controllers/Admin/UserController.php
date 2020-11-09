@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = auth()->user()->agent->users()->paginate(10);
+        $users = User::paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
@@ -52,6 +52,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('sales.payments', 'sales.property', 'sales.plan');
+        $user->sales = $user->sales->sortBy('percent_paid');
         return view('admin.users.show', compact('user'));
     }
 

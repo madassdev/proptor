@@ -10,9 +10,10 @@
 
 
 <ul class="c-header-nav d-md-down-none">
-    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>
-    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>
-    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Settings</a></li>
+    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{route('admin.index')}}">Dashboard <i class="cil cil-speedometer mx-1"></i></a></li>
+    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{route('admin.users.index')}}">Users <i class="cil cil-user mx-1"></i></a></li>
+    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{route('admin.sales.index')}}">Sales <i class="cil cil-cart mx-1"></i></a></li>
+    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{route('admin.payments.index')}}">Payments <i class="cil cil-money mx-1"></i></a></li>
 </ul>
 
 <ul class="c-header-nav mfs-auto mr-5">

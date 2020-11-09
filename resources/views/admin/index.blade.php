@@ -68,7 +68,7 @@
             <div class="card text-white bg-gradient-danger">
                 <div class="card-body card-body d-flex justify-content-between align-items-start">
                     <div>
-                        <div class="text-value-lg">${{number_format($total_payments)}}</div>
+                        <div class="text-value-lg">{!!config('payment.naira').number_format($total_payments)!!}</div>
                         <div>Payments</div>
                     </div>
                     <div class="btn-group">
@@ -86,7 +86,7 @@
 
     </div>
 
-    <div class="row mb-3">
+    <!-- <div class="row mb-3">
         <div class="col-md-12">
             <h5 class="text-primary text-center">
                 *** Featured properties ***
@@ -126,6 +126,6 @@
             </div>
         </div>
         @endforeach
-    </div>
+    </div> -->
 </div>
 @endsection

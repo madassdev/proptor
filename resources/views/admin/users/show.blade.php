@@ -1,3 +1,23 @@
+@php
+
+function paint($amount)
+{
+    if((0 <= $amount) && ($amount <= 30))
+    {
+        return "progress-bar-striped progress-bar-animated border-danger bg-danger";
+    }
+
+    if((30 <= $amount) && ($amount <= 99))
+    {
+        return "progress-bar-striped progress-bar-animated border-warning bg-warning";
+    }
+
+    if($amount >= 100)
+    {
+        return "border-success bg-success";
+    }
+}
+@endphp
 @extends('layouts.app')
 
 @section('subheader')
@@ -14,12 +34,13 @@
 <div id="ui-view"><div><div class="fade-in">
     <div class="row mb-3">
         <div class="col-md-12">
+            <a href="{{route('admin.users.sales.create', $user)}}" class="btn btn-primary"> <i class="cil cil-cart"></i> Add sale</a>
             <a href="{{route('admin.users.index')}}" class="btn btn-danger float-right">Back</a>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row">
         @forelse($user->sales as $sale)
-            <div class="col-md-6">
+            <div class="col-md-6 mx-auto">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -58,13 +79,35 @@
                                     Plan
                                 </small>
                             </div>
+                            <div class="col-md-6 mx-auto">
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar {{paint($sale->percent_paid)}}" role="progressbar" style="width: {{$sale->percent_paid}}%;" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-2 text-center">
+                                    <small>
+                                        Progress: {{min (100, round($sale->percent_paid))}}% 
+                                        @if($sale->percent_paid >= 100) 
+                                            <i class="cil cil-check text-white p-1 bg-success" style="border-radius:200px"></i>
+                                        @endif
+                                    </small> <br>
+                                    <a href="{{route('admin.sales.show', $sale)}}" class="text-primary">
+                                        <i class="cil cil-money"></i>
+                                        View
+                                    </a>
+                                </p>
+                                <p>
+                                </p>
+                            </div>
                         </div>
+                        @if($sale->percent_paid < 100) 
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <p>
-                                    <button class="btn btn-primary btn-sm collapsed" type="button" data-toggle="collapse" data-target="#{{$sale->code}}" aria-expanded="false" aria-controls="{{$sale->code}}">Add Payment</button>
+                                    <button class="btn btn-info btn-sm collapsed" type="button" data-toggle="collapse" data-target="#{{$sale->code}}" aria-expanded="false" aria-controls="{{$sale->code}}">
+                                        Add Payment <i class="cil cil-plus font-weight-bolder mx-1"></i>
+                                    </button>
                                 </p>
-                                <div class="collapse" id="{{$sale->code}}" style="">
+                                <div class="collapse" id="{{$sale->code}}">
                                     <form action="{{route('admin.sales.autopay', $sale)}}" method="post">
                                         @csrf
                                         <div class="form-group">
@@ -78,6 +121,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
